@@ -28,7 +28,7 @@ def get_base64_of_local_image(image_file):
 
 
 # Try to load background image
-encoded_image = get_base64_of_local_image("background_1.jpg")
+encoded_image = get_base64_of_local_image("model/background.jpg")
 
 # Enhanced CSS dengan notifikasi
 background_style = f'background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("data:image/jpg;base64,{encoded_image}");' if encoded_image else 'background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);'
@@ -610,7 +610,7 @@ with col2:
 def load_model():
     """Load the trained model"""
     try:
-        model = joblib.load('model.joblib')
+        model = joblib.load('model/model.joblib')
         return model
     except FileNotFoundError:
         st.error("Model file 'model.joblib' tidak ditemukan. Pastikan file model ada di direktori yang sama.")
@@ -623,7 +623,7 @@ def load_model():
 def load_encoders():
     """Load the trained encoders"""
     try:
-        encoders = joblib.load('encoders.joblib')
+        encoders = joblib.load('model/encoders.joblib')
         return encoders
     except FileNotFoundError:
         st.error("❌ File 'encoders.joblib' tidak ditemukan. Pastikan file encoder ada di direktori yang sama.")
@@ -1068,4 +1068,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
