@@ -25,9 +25,11 @@ Jumlah dropout yang tinggi ini tentunya menjadi salah satu masalah yang besar un
 4. **Model Machine Learning**  
    - Membangun model klasifikasi untuk memprediksi kemungkinan siswa dropout menggunakan base tree model.  
 5. **Evaluasi Model**  
-   - Menggunakan metrik evaluasi seperti Confusion Matrix, Classification Report, dan ROC-AUC.  
+   - Menggunakan metrik evaluasi seperti Confusion Matrix, Classification Report, dan ROC-AUC.
+6. **Membangun Prototype Machine Learning**
+   - Membangun aplikasi prototype berbasis machine learning  
 6. **Dashboard Interaktif**  
-   - Membuat aplikasi interaktif berbasis **Streamlit** untuk memudahkan manajamen menggunakan hasil model machine learning.  
+   - Membuat aplikasi interaktif berbasis **Looker Studio** untuk memudahkan manajamen mengambil keputusan.  
 
 ---
 
@@ -69,23 +71,32 @@ source venv/bin/activate
 ```bash
 pip install -r requirements.txt
 ```
-
-#### 4. Menjalankan Dashboard
-
-```bash
-streamlit run app.py
-```
 ---
 ## Business Dashboard
 
-🔗 Akses Dashboard: (https://student-dropout-prediction-system.streamlit.app/)  
+🔗 Akses Dashboard: (https://lookerstudio.google.com/reporting/2ad7f54a-989f-47e3-bb37-bbeeb1d44a43) 
 
-Dashboard ini adalah aplikasi interaktif berbasis Streamlit yang membantu stakeholder memprediksi kemungkinan mahasiswa melakukan dropout. Dashboard mencakup:
-1. **Prediksi Dropout**: Memprediksi kemungkinan mahasiswa dropout berdasarkan 14 parameter input
-2. **Risk Assessment**: Menilai tingkat risiko dropout dengan confidence score
-3. **Recommendation System**: Memberikan saran spesifik berdasarkan hasil prediksi
-4. **Data Visualization**: Menampilkan probabilitas dalam bentuk chart interaktif
-5. **Educational Tool**: Membantu institusi pendidikan dalam early intervention
+### 🎓 Students Performance Dashboard
+
+### Komponen Utama yang Tampil
+- **KPI (Key Performance Indicators):**
+  - **Record Count:** 4.424 → jumlah mahasiswa.
+  - **Application Order:** 7.6K → total pendaftaran.
+- **Distribusi Status Mahasiswa:**
+  - Graduate (49.9%), Dropout (32.1%), Enrolled (17.9%).
+- **Faktor yang Mempengaruhi:**
+  - Usia pendaftaran.
+  - Beasiswa.
+  - Status keuangan (debtor & tuition fees).
+  - Kondisi khusus (displaced).
+
+### Fungsi Dashboard
+- **Monitoring**: memantau tren dropout, kelulusan, dan enrollment secara cepat.  
+- **Diagnosis**: menemukan faktor penyebab dropout (misalnya keuangan, tidak ada beasiswa, atau usia masuk lebih tua).  
+- **Decision Support**: membantu pihak kampus mengambil keputusan seperti:
+  - Apakah perlu memperbanyak program beasiswa?
+  - Apakah perlu intervensi finansial bagi debtor?
+  - Bagaimana strategi dukungan mahasiswa usia >23 tahun?
 
 ---
 
@@ -121,58 +132,30 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-4. Menggunakan Model Secara Langsung:
-   ```bash
-   import joblib
-   import pandas as pd
-   
-   # Load model & encoder
-   model = joblib.load("model/model.joblib")
-   encoders = joblib.load("model/encoders.joblib")
-   
-   # Contoh input (isi sesuai fitur dataset)
-   data = pd.DataFrame([{
-       "Application Order": 1,
-       "Previous Qualification Grade": 100,
-       "Admission Grade": 80,
-       "Units Enrolled (Sem 1)": 5,
-       "Units Evaluations (Sem 1)": 1,
-       "Units Approved (Sem 1)": 4,
-       "Units Grade (Sem 1)": 16,
-       "Gender": "Male",
-       "Scholarship_holder": "Yes",
-       "Age": 21,
-       "Debtor": "No",
-       "Tuition_fees_up_to_date": "Yes",
-       "Course": "Informatics_Engineering"
-   }])
-   
-   # Transformasi kategorikal
-   for col, encoder in encoders.items():
-       data[col] = encoder.transform(data[col])
-   
-   # Prediksi
-   prediction = model.predict(data)
-   print("Hasil Prediksi:", prediction)
-   ```
+4. Menjalankan prototype machine learning
+```bash
+streamlit run main.py
+```
+
 ---
 
 ## Conclusion
-
 Proyek ini berhasil mengimplementasikan sistem machine learning untuk memprediksi kemungkinan mahasiswa melakukan *dropout* di Jaya Jaya Institut.  
-Melalui tahapan **data understanding, exploratory data analysis, preprocessing, model building, evaluasi, dan deployment**, sistem ini mampu memberikan solusi yang dapat langsung dimanfaatkan oleh pihak institusi.
+Melalui tahapan **data understanding, exploratory data analysis, preprocessing, model building, evaluasi, deployment, serta visualisasi di Looker Studio**, sistem ini mampu memberikan solusi yang dapat langsung dimanfaatkan oleh pihak institusi.
 
 Beberapa poin penting yang dapat disimpulkan:
 1. **Model Machine Learning (XGBoost)** memberikan performa yang baik dalam mengklasifikasikan status mahasiswa dengan menggunakan 14 fitur utama.  
 2. **Faktor-faktor penting** yang mempengaruhi prediksi dropout di antaranya adalah nilai akademik, status keuangan (pembayaran biaya kuliah), serta faktor beasiswa.  
-3. **Dashboard interaktif berbasis Streamlit** mempermudah stakeholder untuk:
-   - Melakukan prediksi dropout mahasiswa secara cepat dan mudah,  
-   - Menilai tingkat risiko berdasarkan confidence score,  
-   - Mendapatkan rekomendasi tindak lanjut,  
-   - Mengeksplorasi data secara visual untuk mendukung pengambilan keputusan.  
-4. Sistem ini dapat menjadi **alat bantu strategis** bagi manajemen dalam melakukan *early intervention* terhadap mahasiswa yang berpotensi dropout.
+3. **Dashboard interaktif berbasis Looker Studio** mempermudah stakeholder untuk:
+   - Mengeksplorasi data performa mahasiswa secara visual,  
+   - Mengidentifikasi tren dropout, graduate, dan enrollment,  
+   - Menemukan faktor risiko utama secara cepat,  
+   - Mendukung pengambilan keputusan berbasis data.  
+4. Sistem ini dapat menjadi **alat bantu strategis** bagi manajemen dalam melakukan *early intervention* terhadap mahasiswa yang berpotensi dropout.  
 
-### Future Work
+---
+
+## Future Work
 Untuk pengembangan ke depan, sistem ini masih dapat ditingkatkan, antara lain:
 - Menambahkan lebih banyak data historis untuk meningkatkan akurasi model,  
 - Mengintegrasikan data real-time dari sistem informasi akademik,  
