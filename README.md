@@ -103,6 +103,7 @@ pip install -r requirements.txt
 ## Menjalankan Sistem Machine Learning
 
 Reviewer dapat menjalankan prototype sistem machine learning ini dengan langkah-langkah berikut:  
+🔗 Akses Prototype Machine Learning : https://student-dropout-prediction-system.streamlit.app/
 
 ### 🔹 1. Setup Environment
 1. Clone repository:
